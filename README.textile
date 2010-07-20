@@ -51,6 +51,21 @@ HOW_TO_UNMOUNT.txt  My U6/     README.txt
   </code>
 </pre>
 
+h3. Example use
+
+p. Here's how to read AIN0 and set FIO0 to digital output high on a U6 named "My U6":
+
+<pre>
+  <code>
+$ cd "My U6/connection/"
+$ cat AIN0
+0.461
+$ echo 1 > FIO0
+  </code>
+</pre>
+
+p. More examples on the "LJFuse homepage":http://labjack.com/support/ljfuse.
+
 h3. Credits
 
 p. LJFuse is built using "fusepy":http://code.google.com/p/fusepy/. It's simple and doesn't get in your way. MacFUSE on Mac OS X makes it easy to set the volume name and icon of the filesystem.
