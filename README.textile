@@ -1,4 +1,6 @@
-"LJFuse homepage":http://labjack.com/support/ljfuse
+h3. Full documentation
+
+p. The "LJFuse homepage":http://labjack.com/support/ljfuse has the complete documentation.
 
 h3. Requirements
 
