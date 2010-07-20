@@ -634,7 +634,7 @@ class DeviceManager(object):
         del(self.deviceByName[old])
         self.deviceByName[new] = dev
 
-class LJFuse(LoggingMixIn, Operations):
+class LJFuse(Operations):
     """Filesystem to access LabJack devices"""
 
     def __init__(self, pathController):
@@ -769,6 +769,11 @@ if __name__ == "__main__":
         kwargs['nolocalcaches'] = True
         if os.path.isfile("labjack-icon.icns"):
             kwargs['volicon'] = "labjack-icon.icns"
+        if dm.usbOverride:
+            unmountStr += "\nDon't Ctrl-C this window. Open a new window to eject as described above."
+            unmountStr += "\n\nConnected via USB, so staying in the foreground."
+            unmountStr += "\nOn Mac OS X, LJFuse can run in the background only when connecting to LJSocket."
+            kwargs['foreground'] = True
     else:
         unmountStr = "Unmount it with `fusermount -u %s' (without quotes)." % mountPoint
     print unmountStr
