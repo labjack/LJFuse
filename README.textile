@@ -11,27 +11,46 @@ h3. Running
 
 p. Plug in a U3, U6, or UE9 and run:
 
+<pre>
+  <code>
 $ python ljfuse.py
+  </code>
+</pre>
 
 p. On Mac OS X, it will print
 
+<pre>
+  <code>
 $ python ljfuse.py
 Making directory root-ljfuse for LJFuse
 Mounting LJFuse at root-ljfuse.
 When done, eject it from the Finder or run `umount LJFuse' (without quotes).
 $
+  </code>
+</pre>
 
 p. On Linux, it will print
 
+<pre>
+  <code>
 $ python ljfuse.py 
 Making directory root-ljfuse for LJFuse
 Mounting LJFuse at root-ljfuse.
 Unmount it with `fusermount -u root-ljfuse' (without quotes).
 $
+  </code>
+</pre>
 
-In either case, change to the `root-ljfuse' directory and look around. There
-are `README.txt' files in every subdirectory with context-specific help.
+In either case, change to the `root-ljfuse' directory and look around. There are `README.txt' files in every subdirectory with context-specific help.
+
+<pre>
+  <code>
+$ cd root-ljfuse/
+$ ls
+HOW_TO_UNMOUNT.txt  My U6/     README.txt
+  </code>
+</pre>
 
 h3. Credits
 
-p. LJFuse is built using "fusepy":http://code.google.com/p/fusepy/.
+p. LJFuse is built using "fusepy":http://code.google.com/p/fusepy/. It's simple and doesn't get in your way. MacFUSE on Mac OS X makes it easy to set the volume name and icon of the filesystem.
