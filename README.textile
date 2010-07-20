@@ -1,0 +1,32 @@
+"LJFuse homepage":http://labjack.com/support/ljfuse
+
+h3. Requirements
+
+* A U3, U6, or UE9 over USB with the latest firmware. The U3 requires 1.26; the U6 requires 1.15; and the UE9 requires control firmware 2.13 and comm firmware 1.5.
+* "LabJackPython":http://github.com/labjack/LabJackPython
+* "Exodriver":http://github.com/labjack/exodriver
+
+h3. Running
+
+p. Plug in a U3, U6, or UE9 and run:
+
+$ python ljfuse.py
+
+p. On Mac OS X, it will print
+
+$ python ljfuse.py
+Making directory root-ljfuse for LJFuse
+Mounting LJFuse at root-ljfuse.
+When done, eject it from the Finder or run `umount LJFuse' (without quotes).
+$
+
+p. On Linux, it will print
+
+$ python ljfuse.py 
+Making directory root-ljfuse for LJFuse
+Mounting LJFuse at root-ljfuse.
+Unmount it with `fusermount -u root-ljfuse' (without quotes).
+$
+
+In either case, change to the `root-ljfuse' directory and look around. There
+are `README.txt' files in every subdirectory with context-specific help.
