@@ -5,6 +5,7 @@ h3. Requirements
 * A U3, U6, or UE9 over USB with the latest firmware. The U3 requires 1.26; the U6 requires 1.15; and the UE9 requires control firmware 2.13 and comm firmware 1.5.
 * "LabJackPython":http://github.com/labjack/LabJackPython
 * "Exodriver":http://github.com/labjack/exodriver
+* On Mac OS X, LJFuse requires "MacFUSE":http://code.google.com/p/macfuse/. On Linux, LJFuse uses the kernel's fuse implementation.
 
 h3. Running
 
@@ -30,3 +31,7 @@ $
 
 In either case, change to the `root-ljfuse' directory and look around. There
 are `README.txt' files in every subdirectory with context-specific help.
+
+h3. Credits
+
+p. LJFuse is built using "fusepy":http://code.google.com/p/fusepy/.
