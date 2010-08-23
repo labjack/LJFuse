@@ -24,7 +24,7 @@ from errno import EROFS, EACCES
 
 from fuse import FUSE, Operations, LoggingMixIn, fuse_get_context
 
-import LabJackPython, u3, u6, ue9, bridge
+import LabJackPython, u3, u6, ue9, skymote
 
 DEBUG = False
 
@@ -602,10 +602,7 @@ class DeviceManager(object):
                 d.controlConfig()
 
             elif dev['prodId'] == 0x501:
-                if DEBUG: print "Got a bridge... opening."
-                d = bridge.Bridge(LJSocket = ljsocketAddress, serial = dev['serial'])
-                d.ethernetFirmwareVersion()
-                d.usbFirmwareVersion()
+                pass
             else:
                 raise Exception("Unknown device type")
 
