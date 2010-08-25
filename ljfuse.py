@@ -602,7 +602,7 @@ class DeviceManager(object):
                 d.controlConfig()
 
             elif dev['prodId'] == 0x501:
-                pass
+                continue
             else:
                 raise Exception("Unknown device type")
 
