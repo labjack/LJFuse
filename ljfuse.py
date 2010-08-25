@@ -129,6 +129,19 @@ class ModbusAddrPath(Path):
         if DEBUG: print "ModbusAddrPath write data =", data
         self.device.writeRegister(self.addr, data)
 
+class TemperaturePath(ModbusAddrPath):
+    def __init__(self, parent, myName, device):
+        self.device = device
+        if self.device.devType == 3:
+            self.addr = 60
+        elif self.device.devType == 6:
+            self.addr = 28
+        elif self.device.devType == 9:
+            self.addr = 266
+        self.mode = 0444
+        super(TemperaturePath, self).__init__(parent, myName, device, self.addr, self.mode)
+        self.length = 8
+
 class FlexibleIODirPath(Path):
     def __init__(self, parent, myName, device, ioNumber):
         super(FlexibleIODirPath, self).__init__(parent, myName)
@@ -246,6 +259,10 @@ class PathController(object):
             # /device name/firmwareVersion
             firmwareVersionPath = DeviceAttributePath(deviceNamePath, "firmwareVersion", thisDevice, "firmwareVersion")
             self.pathDict['/' + name + "/firmwareVersion"] = firmwareVersionPath
+
+            # /device name/internalTemperature
+            internalTemperaturePath = TemperaturePath(deviceNamePath, "internalTemperature", thisDevice)
+            self.pathDict['/' + name + "/internalTemperature"] = internalTemperaturePath
             
             # /device name/modbus
             modbusOpPath = ModbusOpPath(deviceNamePath)
@@ -358,10 +375,12 @@ LJFuse README.txt: Device level
   
   Example:
     $ ls
-    README.txt       firmwareVersion  serialNumber
-    connection/      modbus/
+    README.txt           firmwareVersion      modbus/
+    connection/          internalTemperature  serialNumber
     $ cat firmwareVersion
     1.15
+    $ cat internalTemperature
+    294.908
     $ cd connection/
 
   Bonus: Renaming a device is supported. The syntax is
