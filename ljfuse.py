@@ -44,8 +44,11 @@ U3_LV_CONNECTION_LABELS = {"DAC0":(5000, 0664), "DAC1": (5002,0664)
                           }
 
 U3_LV_FLEXIBLE_CONNECTION_LABELS = {
-                     "FIO0":0, "FIO1":1, "FIO2":2, "FIO3":3, 
-                     "FIO4":4, "FIO5":5, "FIO6":6, "FIO7":7
+                     "FIO0":0, "FIO1":1, "FIO2":2, "FIO3":3,
+                     "FIO4":4, "FIO5":5, "FIO6":6, "FIO7":7,
+                     "EIO0":8, "EIO1":9, "EIO2":10,"EIO3":11,
+                     "EIO4":12,"EIO5":13,"EIO6":14,"EIO7":15,
+                     "CIO0":16,"CIO1":17,"CIO2":18,"CIO3":19,
                     }
 
 U3_HV_CONNECTION_LABELS = {"AIN0": (0, 0444), "AIN1":(2,0444), "AIN2":(4,0444), "AIN3":(6,0444),
@@ -53,7 +56,10 @@ U3_HV_CONNECTION_LABELS = {"AIN0": (0, 0444), "AIN1":(2,0444), "AIN2":(4,0444), 
                 }
 
 U3_HV_FLEXIBLE_CONNECTION_LABELS = {
-                     "FIO4":4, "FIO5":5, "FIO6":6, "FIO7":7
+                     "FIO4":4, "FIO5":5, "FIO6":6, "FIO7":7,
+                     "EIO0":8, "EIO1":9, "EIO2":10,"EIO3":11,
+                     "EIO4":12,"EIO5":13,"EIO6":14,"EIO7":15,
+                     "CIO0":16,"CIO1":17,"CIO2":18,"CIO3":19,
                     }
 
 U6_UE9_CONNECTION_LABELS = {"AIN0": (0, 0444), "AIN1":(2,0444), "AIN2":(4,0444), "AIN3":(6,0444),
