@@ -182,6 +182,7 @@ class FlexibleIOStatePath(Path):
         super(FlexibleIOStatePath, self).__init__(parent, myName)
         self.fileType = "FILE"
         self.length = 6
+        self.mode = 0664
         self.device = device
         self.ioNumber = ioNumber
         self.dirRef = flexibleIODirPath
@@ -197,21 +198,11 @@ class FlexibleIOStatePath(Path):
             return str(readResult).ljust(self.length - 1) + '\n'
 
     def write(self, data):
-        if self.dirRef.state == 1:
-            try:
-                data = int(self.stripNullBytes(data))
-            except ValueError:
-                data = float(self.stripNullBytes(data))
-            self.device.writeRegister(self.digitalModbusAddr, data)
-        else:
-            raise OSError(EACCES, 'Read only')
-
-    def checkMode(self):
-        if self.dirRef.state == 1:
-            return 0664
-        else:
-            return 0444
-    mode = property(checkMode)
+        try:
+            data = int(self.stripNullBytes(data))
+        except ValueError:
+            data = float(self.stripNullBytes(data))
+        self.device.writeRegister(self.digitalModbusAddr, data)
 
 class DeviceAttributePath(Path):
     def __init__(self, parent, myName, device, attr):
@@ -522,14 +513,6 @@ LJFuse README.txt: Connection level
     $ echo 1 > FIO0 # Set the FIO0 state to output high
     $ cat FIO0
     1    
-    $ ls -l FIO0 # The permissions allow writing to a digital output
-    -rw-rw-r--  0 mikec  staff  6 Jul 20 11:49 FIO0
-    $ echo 0 > FIO0-dir
-    $ ls -l FIO0  # The permissions don't allow writing to an input
-    -r--r--r--  0 mikec  staff  6 Jul 20 11:50 FIO0
-    $ echo 2 > FIO0-dir
-    $ ls -l FIO0  # The permissions don't allow writing to an input
-    -r--r--r--  0 mikec  staff  6 Jul 20 11:50 FIO0
 
 """
 
