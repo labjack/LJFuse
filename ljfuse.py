@@ -76,6 +76,9 @@ class Path(object):
         self.children = []
         self.linkToParent(parent)
 
+    def __repr__(self):
+        return str(self.__class__) + ": " + self.myName
+
     def linkToParent(self, parent = None):
         if parent is not None:
             parent.children.append(self)
