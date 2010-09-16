@@ -741,6 +741,44 @@ class LJFuse(Operations):
             raise OSError(EACCES, 'Read only')
         return len(data)
 
+    def create(self, path, mode, fi=None):
+        """
+        Create a file in the modbus/ directory
+        """
+        pathCopy = path
+        parentPathObj, addr = path.rsplit('/', 1)
+        mode = 0664
+        thisDevice = self.pathController.dm.deviceByName["My U3-LV"]
+
+        # Find a valid Modbus path object
+        while path:
+            try:
+                parentPathObj = self.pathController.pathDict[path]
+                break
+            except KeyError:
+                if DEBUG: print "LJFuse write no pathObj for path = ", path
+            # Chop off the end of the path and try again
+            path, end = path.rsplit('/', 1)
+
+        if parentPathObj is not None:
+            if DEBUG: print "LJFuse create path = ", pathCopy
+            if DEBUG: print "LJFuse create parentPathObj = ", parentPathObj
+            if DEBUG: print "LJFuse create mode = ", mode
+            if DEBUG: print "LJFuse create fi = ", fi
+
+            modbusAddrPath = ModbusAddrPath(parentPathObj, addr, thisDevice, int(addr), mode)
+            self.pathController.pathDict[pathCopy] = modbusAddrPath
+
+            # Need a file handle. Create one if we need to
+            try:
+                self.thisFi += 1
+            except AttributeError:
+                self.thisFi = 10
+
+            return self.thisFi
+
+        raise OSError(EROFS, '')
+
     # Disable unused operations:
     #access = None  # Need this one for rename
     flush = None
