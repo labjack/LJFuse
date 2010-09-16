@@ -754,30 +754,33 @@ class LJFuse(Operations):
         while path:
             try:
                 parentPathObj = self.pathController.pathDict[path]
-                break
+                if type(parentPathObj) == ModbusOpPath:
+                    # Found it
+                    break
             except KeyError:
                 if DEBUG: print "LJFuse write no pathObj for path = ", path
             # Chop off the end of the path and try again
             path, end = path.rsplit('/', 1)
 
-        if parentPathObj is not None:
-            if DEBUG: print "LJFuse create path = ", pathCopy
-            if DEBUG: print "LJFuse create parentPathObj = ", parentPathObj
-            if DEBUG: print "LJFuse create mode = ", mode
-            if DEBUG: print "LJFuse create fi = ", fi
+        if type(parentPathObj) != ModbusOpPath:
+            raise OSError(EROFS, '')
 
-            modbusAddrPath = ModbusAddrPath(parentPathObj, addr, thisDevice, int(addr), mode)
-            self.pathController.pathDict[pathCopy] = modbusAddrPath
+        if DEBUG: print "LJFuse create path = ", pathCopy
+        if DEBUG: print "LJFuse create parentPathObj = ", parentPathObj
+        if DEBUG: print "LJFuse create mode = ", mode
+        if DEBUG: print "LJFuse create fi = ", fi
 
-            # Need a file handle. Create one if we need to
-            try:
-                self.thisFi += 1
-            except AttributeError:
-                self.thisFi = 10
+        modbusAddrPath = ModbusAddrPath(parentPathObj, addr, thisDevice, int(addr), mode)
+        self.pathController.pathDict[pathCopy] = modbusAddrPath
 
-            return self.thisFi
+        # Need a file handle. Create one if we need to
+        try:
+            self.thisFi += 1
+        except AttributeError:
+            self.thisFi = 10
 
-        raise OSError(EROFS, '')
+        return self.thisFi
+
 
     # Disable unused operations:
     #access = None  # Need this one for rename
