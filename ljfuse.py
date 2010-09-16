@@ -115,7 +115,7 @@ class ModbusAddrPath(Path):
     def __init__(self, parent, myName, device, addr, mode):
         super(ModbusAddrPath, self).__init__(parent, myName)
         self.fileType = "FILE"
-        self.length = 6
+        self.length = 12
         self.device = device
         self.addr = addr
         self.mode = mode
