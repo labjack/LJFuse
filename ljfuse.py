@@ -748,7 +748,8 @@ class LJFuse(Operations):
         pathCopy = path
         parentPathObj, addr = path.rsplit('/', 1)
         mode = 0664
-        thisDevice = self.pathController.dm.deviceByName["My U3-LV"]
+        thisDeviceStr = path.split('/')[1]
+        thisDevice = self.pathController.dm.deviceByName[thisDeviceStr]
 
         # Find a valid Modbus path object
         while path:
