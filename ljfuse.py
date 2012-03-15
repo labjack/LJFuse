@@ -159,7 +159,8 @@ class FlexibleIODirPath(Path):
         self.mode = 0664
         self.device = device
         self.ioNumber = ioNumber
-        analogInputs = self.device.configIO()['FIOAnalog']
+        config = self.device.configIO()
+        analogInputs = config['FIOAnalog'] + (config['EIOAnalog'] << 8)
         if (analogInputs >> self.ioNumber) & 1:
             self.state = 2
         else:
